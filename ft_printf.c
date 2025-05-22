@@ -6,56 +6,54 @@
 /*   By: aamini <aamini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:36:10 by aamini            #+#    #+#             */
-/*   Updated: 2025/05/22 12:39:45 by aamini           ###   ########.fr       */
+/*   Updated: 2025/05/22 17:25:22 by aamini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	handle_format(va_list args, const char format)
+static int	ft_format(va_list args, const char c)
 {
 	int	count;
 
 	count = 0;
-	if (format == 'c')
+	if (c == 'c')
 		count += ft_putchar(va_arg(args, int));
-	else if (format == 's')
+	else if (c == 's')
 		count += ft_putstr(va_arg(args, char *));
-	else if (format == 'p')
+	else if (c == 'p')
 		count += ft_putptr(va_arg(args, void *));
-	else if (format == 'd' || format == 'i')
+	else if (c == 'd' || c == 'i')
 		count += ft_putnbr(va_arg(args, int));
-	else if (format == 'u')
+	else if (c == 'u')
 		count += ft_putunbr(va_arg(args, unsigned int));
-	else if (format == 'x')
+	else if (c == 'x')
 		count += ft_puthex(va_arg(args, unsigned int), 0);
-	else if (format == 'X')
+	else if (c == 'X')
 		count += ft_puthex(va_arg(args, unsigned int), 1);
-	else if (format == '%')
+	else if (c == '%')
 		count += ft_putchar('%');
 	return (count);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf(const char *str, ...)
 {
 	va_list	args;
 	int		count;
 	int		i;
 
-	if (!format)
-		return (-1);
-	va_start(args, format);
+	va_start(args, str);
 	count = 0;
 	i = 0;
-	while (format[i])
+	while (str[i])
 	{
-		if (format[i] == '%' && format[i + 1])
+		if (str[i] == '%' && str[i + 1])
 		{
-			count += handle_format(args, format[i + 1]);
+			count += ft_format(args, str[i + 1]);
 			i++;
 		}
-		else if (format[i] != '%')
-			count += ft_putchar(format[i]);
+		else if (str[i] != '%')
+			count += ft_putchar(str[i]);
 		i++;
 	}
 	va_end(args);

@@ -6,7 +6,7 @@
 /*   By: aamini <aamini@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 12:35:33 by aamini            #+#    #+#             */
-/*   Updated: 2025/05/22 12:38:45 by aamini           ###   ########.fr       */
+/*   Updated: 2025/05/22 17:20:29 by aamini           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-int	ft_printf(const char *format, ...);
+int	ft_printf(const char *str, ...);
 int	ft_putchar(char c);
 int	ft_putstr(char *str);
 int	ft_putnbr(int n);
