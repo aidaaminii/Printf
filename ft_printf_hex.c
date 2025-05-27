@@ -30,5 +30,13 @@ int	ft_puthex(unsigned int n, int uppercase)
 
 int	ft_puthex_ptr(unsigned long n)
 {
-	return (ft_puthex(n, 0));
+	int		count;
+	char	*base;
+
+	count = 0;
+	base = "0123456789abcdef";
+	if (n >= 16)
+		count += ft_puthex_ptr(n / 16);
+	count += ft_putchar(base[n % 16]);
+	return (count);
 }
