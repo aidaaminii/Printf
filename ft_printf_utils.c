@@ -12,27 +12,6 @@
 
 #include "ft_printf.h"
 
-int	ft_putchar(char c)
-{
-	write(1, &c, 1);
-	return (1);
-}
-
-int	ft_putstr(char *str)
-{
-	int	count;
-
-	count = 0;
-	if (!str)
-		return (ft_putstr("(null)"));
-	while (str[count])
-	{
-		ft_putchar(str[count]);
-		count++;
-	}
-	return (count);
-}
-
 int	ft_putnbr(int n)
 {
 	int		count;
@@ -69,5 +48,30 @@ int	ft_puthex(unsigned int n, int uppercase)
 	if (n >= 16)
 		count += ft_puthex(n / 16, uppercase);
 	count += ft_putchar(base[n % 16]);
+	return (count);
+}
+
+static int	ft_puthex_ptr(unsigned long n)
+{
+	int		count;
+	char	*base;
+
+	count = 0;
+	base = "0123456789abcdef";
+	if (n >= 16)
+		count += ft_puthex_ptr(n / 16);
+	count += ft_putchar(base[n % 16]);
+	return (count);
+}
+
+int	ft_putptr(void *ptr)
+{
+	int	count;
+
+	count = 0;
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	count += ft_putstr("0x");
+	count += ft_puthex_ptr((unsigned long)ptr);
 	return (count);
 }
