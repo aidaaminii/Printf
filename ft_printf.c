@@ -53,7 +53,10 @@ int	ft_printf(const char *str, ...)
 			i++;
 		}
 		else if (str[i] != '%')
-			count += ft_putchar(str[i]);
+		{
+			ft_putchar_fd(str[i], 1);
+			count += 1;
+		}
 		i++;
 	}
 	va_end(args);

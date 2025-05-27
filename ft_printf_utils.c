@@ -12,6 +12,24 @@
 
 #include "ft_printf.h"
 
+int	ft_putchar(char c)
+{
+	ft_putchar_fd(c, 1);
+	return (1);
+}
+
+int	ft_putstr(char *str)
+{
+	int	count;
+
+	count = 0;
+	if (!str)
+		return (ft_putstr("(null)"));
+	while (str[count])
+		count += ft_putchar(str[count]);
+	return (count);
+}
+
 int	ft_putnbr(int n)
 {
 	int		count;
@@ -32,35 +50,6 @@ int	ft_putunbr(unsigned int n)
 	if (n >= 10)
 		count += ft_putunbr(n / 10);
 	count += ft_putchar(n % 10 + '0');
-	return (count);
-}
-
-int	ft_puthex(unsigned int n, int uppercase)
-{
-	int		count;
-	char	*base;
-
-	count = 0;
-	if (uppercase)
-		base = "0123456789ABCDEF";
-	else
-		base = "0123456789abcdef";
-	if (n >= 16)
-		count += ft_puthex(n / 16, uppercase);
-	count += ft_putchar(base[n % 16]);
-	return (count);
-}
-
-static int	ft_puthex_ptr(unsigned long n)
-{
-	int		count;
-	char	*base;
-
-	count = 0;
-	base = "0123456789abcdef";
-	if (n >= 16)
-		count += ft_puthex_ptr(n / 16);
-	count += ft_putchar(base[n % 16]);
 	return (count);
 }
 
